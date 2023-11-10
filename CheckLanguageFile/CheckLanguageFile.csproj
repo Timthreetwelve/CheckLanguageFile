@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+	  <Description>Utility to check language files</Description>
+	  <Copyright>© $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
+	  <Authors>Tim Kennedy</Authors>
+	  <Company>T_K</Company>
+	  <Product>Check Language File</Product>
+	  <FileVersion>0.0.1.0</FileVersion>
+	  <ApplicationIcon>Check.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Check.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+</Project>
