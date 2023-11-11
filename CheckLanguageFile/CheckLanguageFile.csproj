@@ -5,13 +5,14 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
-	  <Description>Utility to check language files</Description>
-	  <Copyright>© $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
-	  <Authors>Tim Kennedy</Authors>
-	  <Company>T_K</Company>
-	  <Product>Check Language File</Product>
-	  <FileVersion>0.0.1.0</FileVersion>
-	  <ApplicationIcon>Check.ico</ApplicationIcon>
+      <Description>Utility to check language files</Description>
+      <Copyright>© $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
+      <Authors>Tim Kennedy</Authors>
+      <Company>T_K</Company>
+      <Product>Check Language File</Product>
+      <FileVersion>0.0.2.0</FileVersion>
+      <Version>0.0.2.0</Version>
+      <ApplicationIcon>Check.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,5 +22,15 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
+
+    <Target Name="PublishZip" AfterTargets="Publish">
+        <PropertyGroup>
+            <PowerShellScript>-File "D:\Visual Studio\Source\PowerShell\PublishZip\PubZip.ps1"</PowerShellScript>
+            <Name>-name "Check Language File"</Name>
+            <Version>-version $(AssemblyVersion)</Version>
+            <Path>-path "$(ProjectDir)"</Path>
+        </PropertyGroup>
+        <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name) $(Version) $(Path)" />
+    </Target>
 
 </Project>
