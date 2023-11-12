@@ -26,18 +26,19 @@ namespace CheckLanguageFile
         #region Check the file
         public void ReadFile(string fileToCheck)
         {
+            ResourceDictionary dict1 = new();
             try
             {
                 dataGrid.ItemsSource = null;
                 dataGrid.Items.Clear();
 
                 string file = Path.GetFileName(fileToCheck);
-                messages.Text = $"Validating: {file}\n";
+                string fullPath = Path.GetFullPath(fileToCheck);
+                messages.Text = $"Validating: {fullPath}\n";
 
-                ResourceDictionary dict1 = new()
-                {
-                    Source = new Uri(fileToCheck, UriKind.RelativeOrAbsolute)
-                };
+                Uri temp = new Uri(fileToCheck, UriKind.RelativeOrAbsolute);
+                dict1.Source = temp;
+
                 messages.Text += $"There are a total of {dict1.Count} keys.\n";
 
                 List<LanguageStrings> lStrings = new();
@@ -167,7 +168,7 @@ namespace CheckLanguageFile
             {
                 foreach (var item in result2)
                 {
-                    comparemessages.Text += $"[File 1] ({dict1FileName}) is missing key {item} \n";
+                    comparemessages.Text += $"[File 1] {dict1FileName} is missing key {item} \n";
                 }
             }
 
@@ -268,7 +269,6 @@ namespace CheckLanguageFile
         {
             dataGrid.ItemsSource = null;
             dataGrid.Items.Clear();
-            textBox.Text = string.Empty;
             messages.Text = string.Empty;
         }
 
