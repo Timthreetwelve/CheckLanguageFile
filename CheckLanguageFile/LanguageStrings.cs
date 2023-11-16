@@ -11,4 +11,7 @@ internal partial class LanguageStrings : ObservableObject
 
     [ObservableProperty]
     private string _stringValue;
+
+    [ObservableProperty]
+    private string _compareValue;
 }
