@@ -19,8 +19,9 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 ### In the Compare Files tab:
 - Two files are compared
 - Total number of keys are listed for each file
-- Missing keys are listed individually
+- Missing keys are listed individually - **keys listed as "missing" in the en-US files may have been removed**
 - The total number of matching keys is listed
+- The grid at the bottom lists the values for each of the files. Missing values and values that are the same are color coded.
 
 ### Nothing fancy:
 ❌ There's no installer, just a portable version in a zip file.
