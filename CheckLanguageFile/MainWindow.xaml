@@ -154,7 +154,8 @@
         <TabItem
             Padding="10,5" FontSize="14"
             FontWeight="SemiBold"
-            Header="Compare Files">
+            Header="Compare Files"
+            KeyUp="TabItem_KeyUp">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -170,7 +171,7 @@
                         <RowDefinition Height="10" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock
@@ -180,9 +181,9 @@
                         Text="Timthreetwelve Language File Comparison" />
 
                     <Button
-                        Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
-                        Width="100" Height="32"
-                        Margin="0,0,0,0"
+                        Grid.Row="1" Grid.RowSpan="2"
+                        Grid.Column="2" Width="100"
+                        Height="32" Margin="0,0,0,0"
                         HorizontalAlignment="Left"
                         Click="Button_Swap_Click" Content="Swap"
                         FontSize="14" FontWeight="SemiBold" />
@@ -289,7 +290,7 @@
                             Text="= Same value" />
                     </StackPanel>
                 </Grid>
-                
+
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="95" />
@@ -348,6 +349,11 @@
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="ApplicationCommands.Copy"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
                 </Grid>
             </Grid>
