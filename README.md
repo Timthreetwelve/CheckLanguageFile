@@ -37,4 +37,5 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
-![CheckLanguageFile_2023-11-11_15-55-38](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/1c8bbd96-9a34-4ee3-954e-54936dddf17e)
+![CheckLanguageFile_2023-11-16_15-22-06](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/7e48485e-d79f-4ab8-8eac-6c5792e9e537)
+
