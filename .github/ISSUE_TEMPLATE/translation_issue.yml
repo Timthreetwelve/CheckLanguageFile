@@ -10,9 +10,6 @@ body:
   - type: markdown
     attributes:
       value: "*Please add the language name to the subject line above*"
-  - type: markdown
-    attributes:
-      value: "### Please refer to the Contribute a Translation page in the Wiki before contributing ###"
   - type: textarea
     id: problem
     attributes:
