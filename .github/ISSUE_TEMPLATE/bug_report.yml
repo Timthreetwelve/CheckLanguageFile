@@ -6,15 +6,11 @@ assignees: Timthreetwelve
 body:
   - type: markdown
     attributes:
-      value: "*Feel free to change the issue title above*"
+      value: "*Please update the issue title above*"
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
-  - type: markdown
-    attributes:
-      value: |
-        ### Please read the Known Issues and Troubleshooting topics in the Wiki before opening a Bug Report.
   - type: checkboxes
     attributes:
       label: Is there an existing issue for this?
@@ -49,7 +45,6 @@ body:
       options:
       - Installer (exe)
       - Portable (zip)
-      - Winget
     validations:
       required: true
   - type: input
@@ -68,18 +63,6 @@ body:
       placeholder: ex. Windows 11 22H2 build 22621.1702
     validations:
       required: true
-  - type: textarea
-    id: logs
-    attributes:
-      label: Relevant log output
-      description: |
-        Please copy and paste (or attach) any relevant log output. 
-        
-        You can open the application log file by clicking on the three dot menu in the upper right and selecting View Log File.
-        If the error occurred during installation, paste the setup log (found in the %Temp% directory). The file name will look like *Setup Log date sequence#.txt*
-      render: shell
-    validations:
-      required: false
   - type: textarea
     id: anything-else
     attributes:
