@@ -125,11 +125,17 @@ public partial class MainWindow : Window
         {
             if (ex.InnerException != null)
             {
-                comparemessages.Text = $"{ex.Message}\n{ex.InnerException.Message}\n";
+                _ = MessageBox.Show("{ex.Message}\n{ex.InnerException.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
             else
             {
-                comparemessages.Text = $"{ex.Message}\n";
+                _ = MessageBox.Show("{ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
             return;
         }
@@ -173,7 +179,7 @@ public partial class MainWindow : Window
         {
             foreach (var item in result2)
             {
-                comparemessages.Text += $"[File 1] {dict1FileName} is missing key {item} \n";
+                Debug.WriteLine($"{dict1FileName} does not have key {item}");
             }
         }
 
@@ -182,14 +188,14 @@ public partial class MainWindow : Window
         {
             foreach (var item in result1)
             {
-                comparemessages.Text += $"[File 2] {dict2FileName} is missing key {item} \n";
+                Debug.WriteLine($"{dict2FileName} does not have key {item}");
             }
         }
 
         IEnumerable<string> result3 = l2Strings.Select(x => x.StringKey).Intersect(l1Strings.Select(x => x.StringKey), comparer);
         if (result3.Any())
         {
-            comparemessages.Text += $"{result3.Count()} keys are the same";
+            Debug.WriteLine($"{result3.Count()} keys are the same");
         }
 
         foreach (var item in l1Strings)
