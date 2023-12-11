@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 using Microsoft.Win32;
 using System;
@@ -263,14 +263,31 @@ public partial class MainWindow : Window
             Title = "Browse for File 1",
             CheckFileExists = true,
             CheckPathExists = true,
+            Multiselect = true,
             Filter = "Xaml files (*.xaml)|*.xaml"
         };
         if (dlgOpen.ShowDialog() == true)
         {
+            if (dlgOpen.FileNames.Length == 1)
+            {
             tbxFile1.Text = dlgOpen.FileName;
             tbxFile1.Focus();
             tbxFile1.CaretIndex = dlgOpen.FileName.Length;
             tbxFile1.ScrollToEnd();
+            }
+            else if (dlgOpen.FileNames.Length == 2)
+            {
+                tbxFile1.Text = dlgOpen.FileNames[0];
+                tbxFile1.Focus();
+                tbxFile1.CaretIndex = dlgOpen.FileNames[0].Length;
+                tbxFile1.ScrollToEnd();
+
+                tbxFile2.Text = dlgOpen.FileNames[1];
+                tbxFile2.Focus();
+                tbxFile2.CaretIndex = dlgOpen.FileNames[1].Length;
+                tbxFile2.ScrollToEnd();
+            }
+
         }
     }
 
@@ -281,14 +298,31 @@ public partial class MainWindow : Window
             Title = "Browse for File 2",
             CheckFileExists = true,
             CheckPathExists = true,
+            Multiselect = true,
             Filter = "Xaml files (*.xaml)|*.xaml"
         };
         if (dlgOpen.ShowDialog() == true)
         {
+            if (dlgOpen.FileNames.Length == 1)
+            {
             tbxFile2.Text = dlgOpen.FileName;
             tbxFile2.Focus();
             tbxFile2.CaretIndex = dlgOpen.FileName.Length;
             tbxFile2.ScrollToEnd();
+            }
+            else if (dlgOpen.FileNames.Length == 2)
+            {
+                tbxFile1.Text = dlgOpen.FileNames[0];
+                tbxFile1.Focus();
+                tbxFile1.CaretIndex = dlgOpen.FileNames[0].Length;
+                tbxFile1.ScrollToEnd();
+
+                tbxFile2.Text = dlgOpen.FileNames[1];
+                tbxFile2.Focus();
+                tbxFile2.CaretIndex = dlgOpen.FileNames[1].Length;
+                tbxFile2.ScrollToEnd();
+            }
+
         }
     }
 
