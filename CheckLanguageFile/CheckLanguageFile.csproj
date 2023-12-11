@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWPF>true</UseWPF>
-      <Description>Utility to check language files</Description>
-      <Copyright>© $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
-      <Authors>Tim Kennedy</Authors>
-      <Company>T_K</Company>
-      <Product>Check Language File</Product>
-      <FileVersion>0.0.4.0</FileVersion>
-      <Version>0.0.4.0</Version>
-      <ApplicationIcon>Check.ico</ApplicationIcon>
+    <Description>Utility to check language files</Description>
+    <Copyright>© 2023 - $([System.DateTime]::UtcNow.Year) Tim Kennedy</Copyright>
+    <Authors>Tim Kennedy</Authors>
+    <Company>T_K</Company>
+    <Product>Check Language File</Product>
+    <ApplicationIcon>Check.ico</ApplicationIcon>
+    <GenerateAssemblyFileVersionAttribute>False</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>False</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyVersionAttribute>False</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,16 +22,22 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
     <Target Name="PublishZip" AfterTargets="Publish">
-        <PropertyGroup>
+        <PropertyGroup >
             <PowerShellScript>-File "D:\Visual Studio\Source\PowerShell\PublishZip\PubZip.ps1"</PowerShellScript>
             <Name>-name "Check Language File"</Name>
             <Version>-version $(AssemblyVersion)</Version>
             <Path>-path "$(ProjectDir)"</Path>
         </PropertyGroup>
-        <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name) $(Version) $(Path)" />
+
+        <!-- Execute the PowerShell script -->
+        <Exec Command="pwsh -NoProfile $(PowerShellScript) $(Name) $(Version) $(PubType) $(Path)"/>
     </Target>
 
 </Project>
