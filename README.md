@@ -10,6 +10,7 @@ Files to be checked can be selected:
 - By copying and pasting
 
 ### In the File Validation tab, files are checked for:
+- Syntax errors
 - Duplicate keys (technically only the first duplicate key, since a duplicate key will throw an exception)
 - Null or empty keys
 - Null or empty values
