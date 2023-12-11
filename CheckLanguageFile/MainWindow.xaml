@@ -342,6 +342,42 @@
                         </DataGrid.ContextMenu>
                     </DataGrid>
                 </Grid>
+
+                <Grid Grid.Row="2">
+                    <TextBlock
+                        x:Name="TbxStatus" Margin="20,0"
+                        FontWeight="Normal"
+                        Text="{Binding ElementName=CompareGrid, Path=Items.Count, StringFormat={}{0} Items}" />
+
+                    <StackPanel
+                        Margin="10,0,20,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <Border
+                            Width="20" Height="20"
+                            Margin="10,0,5,0" Background="MistyRose"
+                            BorderBrush="Gray" BorderThickness="1" />
+
+                        <TextBlock
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            FontWeight="Normal"
+                            Text="= No Value" />
+
+                        <Border
+                            Width="20" Height="20"
+                            Margin="10,0,5,0"
+                            Background="LemonChiffon"
+                            BorderBrush="Gray" BorderThickness="1" />
+
+                        <TextBlock
+                            Margin="0,0,10,0"
+                            VerticalAlignment="Center"
+                            FontWeight="Normal"
+                            Text="= Same value" />
+                    </StackPanel>
+                </Grid>
             </Grid>
         </TabItem>
         <!--#endregion-->
