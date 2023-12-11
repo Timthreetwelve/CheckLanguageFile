@@ -1,4 +1,4 @@
-<Window
+﻿<Window
     x:Class="CheckLanguageFile.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -160,6 +160,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="26" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -168,28 +169,21 @@
                         <RowDefinition Height="46" />
                         <RowDefinition Height="46" />
                         <RowDefinition Height="46" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="1" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
+
                     <TextBlock
                         Grid.Row="0" Margin="20,0"
                         VerticalAlignment="Center" FontSize="14"
                         FontWeight="SemiBold"
                         Text="Timthreetwelve Language File Comparison" />
 
-                    <Button
-                        Grid.Row="1" Grid.RowSpan="2"
-                        Grid.Column="2" Width="100"
-                        Height="32" Margin="0,0,0,0"
-                        HorizontalAlignment="Left"
-                        Click="Button_Swap_Click" Content="Swap"
-                        FontSize="14" FontWeight="SemiBold" />
-
                     <StackPanel
-                        Grid.Row="1" Margin="20,0"
+                        Grid.Row="1" Margin="20,0,0,0"
                         Orientation="Horizontal">
 
                         <TextBlock
@@ -220,7 +214,7 @@
                     </StackPanel>
 
                     <StackPanel
-                        Grid.Row="2" Margin="20,0"
+                        Grid.Row="2" Margin="20,0,0,0"
                         Orientation="Horizontal">
 
                         <TextBlock
@@ -268,26 +262,30 @@
                             Content="Clear" FontSize="14"
                             FontWeight="SemiBold" />
 
-                        <Border
-                            Width="20" Height="20"
-                            Margin="40,0,5,0" Background="MistyRose"
-                            BorderBrush="Gray" BorderThickness="1" />
+                        <Button
+                            Width="100" Height="32"
+                            Margin="10,0"
+                            HorizontalAlignment="Right"
+                            Click="Button_Swap_Click" Content="Swap"
+                            FontSize="14" FontWeight="SemiBold" />
 
-                        <TextBlock
-                            Margin="0,0,10,0"
+                        <RadioButton
+                            x:Name="ShowAllRadio" Margin="10,0"
                             VerticalAlignment="Center"
-                            Text="= No Value" />
+                            VerticalContentAlignment="Center"
+                            Checked="Radio_ShowAll" Content="Show All" />
 
-                        <Border
-                            Width="20" Height="20"
-                            Margin="40,0,5,0"
-                            Background="LemonChiffon"
-                            BorderBrush="Gray" BorderThickness="1" />
+                        <RadioButton
+                            Margin="10,0" VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Checked="Radio_NoValue_Checked"
+                            Content="Only No Value" />
 
-                        <TextBlock
-                            Margin="0,0,10,0"
-                            VerticalAlignment="Center"
-                            Text="= Same value" />
+                        <RadioButton
+                            Margin="10,0" VerticalAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Checked="Radio_SameValue_Checked"
+                            Content="Only Same Value" />
                     </StackPanel>
                 </Grid>
 
@@ -331,13 +329,14 @@
                                                 </MultiBinding>
                                             </Setter.Value>
                                         </Setter>
+                                        <Setter Property="Foreground" Value="Black" />
                                     </Style>
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Command="ApplicationCommands.Copy"/>
+                                <MenuItem Command="ApplicationCommands.Copy" />
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>

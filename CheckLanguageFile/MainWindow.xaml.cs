@@ -1,29 +1,26 @@
-// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
+﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
 using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace CheckLanguageFile;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
 
-        Title = "Check Language File - " + Assembly.GetEntryAssembly().GetName().Version.ToString();
+        Title = $"Check Language File - {GitVersionInformation.SemVer}";
     }
 
     #region Check the file
@@ -279,10 +276,10 @@ public partial class MainWindow : Window
         {
             if (dlgOpen.FileNames.Length == 1)
             {
-            tbxFile1.Text = dlgOpen.FileName;
-            tbxFile1.Focus();
-            tbxFile1.CaretIndex = dlgOpen.FileName.Length;
-            tbxFile1.ScrollToEnd();
+                tbxFile1.Text = dlgOpen.FileName;
+                tbxFile1.Focus();
+                tbxFile1.CaretIndex = dlgOpen.FileName.Length;
+                tbxFile1.ScrollToEnd();
             }
             else if (dlgOpen.FileNames.Length == 2)
             {
@@ -295,6 +292,8 @@ public partial class MainWindow : Window
                 tbxFile2.Focus();
                 tbxFile2.CaretIndex = dlgOpen.FileNames[1].Length;
                 tbxFile2.ScrollToEnd();
+
+                CompareLanguageDictionaries();
             }
 
         }
@@ -314,10 +313,10 @@ public partial class MainWindow : Window
         {
             if (dlgOpen.FileNames.Length == 1)
             {
-            tbxFile2.Text = dlgOpen.FileName;
-            tbxFile2.Focus();
-            tbxFile2.CaretIndex = dlgOpen.FileName.Length;
-            tbxFile2.ScrollToEnd();
+                tbxFile2.Text = dlgOpen.FileName;
+                tbxFile2.Focus();
+                tbxFile2.CaretIndex = dlgOpen.FileName.Length;
+                tbxFile2.ScrollToEnd();
             }
             else if (dlgOpen.FileNames.Length == 2)
             {
@@ -330,6 +329,8 @@ public partial class MainWindow : Window
                 tbxFile2.Focus();
                 tbxFile2.CaretIndex = dlgOpen.FileNames[1].Length;
                 tbxFile2.ScrollToEnd();
+
+                CompareLanguageDictionaries();
             }
 
         }
@@ -344,19 +345,41 @@ public partial class MainWindow : Window
 
     private void Compare_Button_Click(object sender, RoutedEventArgs e)
     {
-        comparemessages.Text = string.Empty;
         CompareLanguageDictionaries();
+        ShowAllRadio.IsChecked = true;
     }
 
     private void Compare_Clear_Button_Click(object sender, RoutedEventArgs e)
     {
         CompareGrid.ItemsSource = null;
         CompareGrid.Items.Clear();
-        comparemessages.Text = string.Empty;
         txtKeys1.Text = string.Empty;
         txtKeys2.Text = string.Empty;
     }
+
+    private void Button_Swap_Click(object sender, RoutedEventArgs e)
+    {
+        SwapFiles();
+        RemoveFilter();
+    }
     #endregion Button click events
+
+    #region Radio buttons
+    private void Radio_NoValue_Checked(object sender, RoutedEventArgs e)
+    {
+        FilterNoValue();
+    }
+
+    private void Radio_SameValue_Checked(object sender, RoutedEventArgs e)
+    {
+        FilterSameValue();
+    }
+
+    private void Radio_ShowAll(object sender, RoutedEventArgs e)
+    {
+        RemoveFilter();
+    }
+    #endregion Radio buttons
 
     #region Filter changed
     private void TbxFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
@@ -427,7 +450,7 @@ public partial class MainWindow : Window
     {
         string filter = tbxFilter.Text;
 
-        ICollectionView cv = CollectionViewSource.GetDefaultView(dataGrid.ItemsSource);
+        ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
         if (filter?.Length == 0)
         {
             cv.Filter = null;
@@ -448,21 +471,62 @@ public partial class MainWindow : Window
     }
     #endregion Filter the datagrid
 
+    #region Filter CompareGrid
+    private void FilterNoValue()
+    {
+        if (CompareGrid.ItemsSource != null)
+        {
+            ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
+            cv.Filter = o =>
+            {
+                LanguageStrings ls = o as LanguageStrings;
+                if (ls.StringValue?.Length == 0)
+                {
+                    return true;
+                }
+                else if (ls.CompareValue?.Length == 0)
+                {
+                    return true;
+                }
+                return false;
+            };
+        }
+    }
+
+    private void FilterSameValue()
+    {
+        if (CompareGrid.ItemsSource != null)
+        {
+
+            ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
+            cv.Filter = o =>
+            {
+                LanguageStrings ls = o as LanguageStrings;
+                return ls.CompareValue == ls.StringValue;
+            };
+        }
+    }
+
+    private void RemoveFilter()
+    {
+        if (CompareGrid.ItemsSource != null)
+        {
+            ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
+            cv.Filter = null;
+            ShowAllRadio.IsChecked = true;
+        }
+    }
+    #endregion Filter CompareGrid
+
+    #region Swap compare files
     public void SwapFiles()
     {
-        string oldFile1 = tbxFile1.Text;
-        string oldFile2 = tbxFile2.Text;
-        tbxFile1.Text = oldFile2;
-        tbxFile2.Text = oldFile1;
-        comparemessages.Text = string.Empty;
+        (tbxFile2.Text, tbxFile1.Text) = (tbxFile1.Text, tbxFile2.Text);
         CompareLanguageDictionaries();
     }
+    #endregion Swap compare files
 
-    private void Button_Swap_Click(object sender, RoutedEventArgs e)
-    {
-        SwapFiles();
-    }
-
+    #region Escape Key
     private void TabItem_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Escape)
@@ -470,4 +534,6 @@ public partial class MainWindow : Window
             CompareGrid.SelectedItem = null;
         }
     }
+    #endregion Escape Key
+
 }
