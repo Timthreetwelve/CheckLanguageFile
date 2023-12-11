@@ -143,6 +143,9 @@ public partial class MainWindow : Window
         string dict1FileName = Path.GetFileName(dict1.Source.ToString());
         string dict2FileName = Path.GetFileName(dict2.Source.ToString());
 
+        CompareGrid.Columns[1].Header = dict1FileName;
+        CompareGrid.Columns[2].Header = dict2FileName;
+
         List<LanguageStrings> l1Strings = new();
         List<LanguageStrings> l2Strings = new();
 

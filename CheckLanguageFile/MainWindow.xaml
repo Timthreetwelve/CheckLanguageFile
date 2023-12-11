@@ -316,11 +316,11 @@
                             <DataGridTextColumn
                                 MinWidth="200"
                                 Binding="{Binding StringValue}"
-                                Header="File 1 Value" />
+                                Header="File 1" />
                             <DataGridTextColumn
                                 MinWidth="200"
                                 Binding="{Binding CompareValue}"
-                                Header="File 2 Value">
+                                Header="File 2">
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
                                         <Setter Property="Background">
