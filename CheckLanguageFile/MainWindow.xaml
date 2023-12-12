@@ -273,7 +273,8 @@
                             x:Name="ShowAllRadio" Margin="10,0"
                             VerticalAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Checked="Radio_ShowAll" Content="Show All" />
+                            Checked="Radio_ShowAll"
+                            Content="Show All" />
 
                         <RadioButton
                             Margin="10,0" VerticalAlignment="Center"
@@ -361,8 +362,7 @@
                         <TextBlock
                             Margin="0,0,10,0"
                             VerticalAlignment="Center"
-                            FontWeight="Normal"
-                            Text="= No Value" />
+                            FontWeight="Normal" Text="= No Value" />
 
                         <Border
                             Width="20" Height="20"
@@ -373,8 +373,7 @@
                         <TextBlock
                             Margin="0,0,10,0"
                             VerticalAlignment="Center"
-                            FontWeight="Normal"
-                            Text="= Same value" />
+                            FontWeight="Normal" Text="= Same value" />
                     </StackPanel>
                 </Grid>
             </Grid>
