@@ -41,4 +41,4 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
 
-![CheckLanguageFile_2023-12-10_21-30-27](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/955cd2a2-26d7-4aa5-8ddc-7a291de3f2c6)
+![CheckLanguageFile_2023-12-12_21-24-27](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/0a26d0ef-714e-4a5d-9109-bae6d49c485f)
