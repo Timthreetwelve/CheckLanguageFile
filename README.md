@@ -18,11 +18,12 @@ Files to be checked can be selected:
 Additionally, all keys and the associated string values are listed in a grid. The grid can be filtered by key or string.
 
 ### In the Compare Files tab:
-- Two files are compared
-- Total number of keys are listed for each file
-- Missing keys are listed individually - **keys listed as "missing" in the en-US files may have been removed**
-- The total number of matching keys is listed
+- Two files are compared.
+- Total number of keys are listed for each file.
 - The grid at the bottom lists the values for each of the files. Missing values and values that are the same are color coded.
+- 🆕 The grid can be filtered to show only keys with no values or keys where the value is the same for both files.
+- 🆕 Both files can be added at the same time when using the file open dialog. Simply `Ctrl+Click` on two files.
+- 🆕 File names are displayed in the grid column headers.
 
 ### Nothing fancy:
 ❌ There's no installer, just a portable version in a zip file.
@@ -39,5 +40,5 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
-![CheckLanguageFile_2023-11-16_15-22-06](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/7e48485e-d79f-4ab8-8eac-6c5792e9e537)
 
+![CheckLanguageFile_2023-12-10_21-30-27](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/955cd2a2-26d7-4aa5-8ddc-7a291de3f2c6)
