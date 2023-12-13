@@ -24,6 +24,7 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 - 🆕 The grid can be filtered to show only keys with no values or keys where the value is the same for both files.
 - 🆕 Both files can be added at the same time when using the file open dialog. Simply `Ctrl+Click` on two files.
 - 🆕 File names are displayed in the grid column headers.
+- 🆕 Export the keys with missing values. Lines are formatted for the xaml file. Just add the translated strings between the `><` and paste into the appropriate place in the language file.
 
 ### Nothing fancy:
 ❌ There's no installer, just a portable version in a zip file.
