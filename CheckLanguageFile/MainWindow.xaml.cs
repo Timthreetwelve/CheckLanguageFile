@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Tim Kennedy. All Rights Reserved. Licensed under the MIT License.
 
+#region Using statements
 using Microsoft.Win32;
 using System;
 using System.Collections;
@@ -8,14 +9,18 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+#endregion Using statements
 
 namespace CheckLanguageFile;
 
 public partial class MainWindow : Window
 {
+    public List<string> MissingValues { get; set; } = new();
+
     public MainWindow()
     {
         InitializeComponent();
@@ -92,6 +97,8 @@ public partial class MainWindow : Window
     #region Compare dictionaries
     public void CompareLanguageDictionaries()
     {
+        btnExport.IsEnabled = false;
+
         if (!File.Exists(tbxFile1.Text))
         {
             _ = MessageBox.Show("File 1 not found",
@@ -189,7 +196,9 @@ public partial class MainWindow : Window
             foreach (var item in result1)
             {
                 Debug.WriteLine($"{dict2FileName} does not have key {item}");
+                MissingValues.Add(item);
             }
+            btnExport.IsEnabled = true;
         }
 
         IEnumerable<string> result3 = l2Strings.Select(x => x.StringKey).Intersect(l1Strings.Select(x => x.StringKey), comparer);
@@ -361,6 +370,11 @@ public partial class MainWindow : Window
     {
         SwapFiles();
         RemoveFilter();
+    }
+
+    private void Export_Button_Click(object sender, RoutedEventArgs e)
+    {
+        ExportMissing();
     }
     #endregion Button click events
 
@@ -536,4 +550,32 @@ public partial class MainWindow : Window
     }
     #endregion Escape Key
 
+    #region Format and export keys with missing values
+    public void ExportMissing()
+    {
+        if (MissingValues.Count > 0)
+        {
+            StringBuilder sb = new();
+            foreach (var item in MissingValues)
+            {
+                _ = sb.Append("<sys:String x:Key=\"").Append(item).AppendLine("\"></sys:String>");
+            }
+            string missing = sb.ToString();
+
+            SaveFileDialog save = new()
+            {
+                Title = "Save",
+                Filter = "Txt File|*.txt",
+                FileName = "ExportedStrings.txt",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+            };
+            bool? result = save.ShowDialog();
+            if (result == true)
+            {
+                File.WriteAllText(save.FileName, missing);
+            }
+
+        }
+    }
+    #endregion Format and export keys with missing values
 }
