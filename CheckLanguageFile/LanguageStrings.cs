@@ -7,11 +7,10 @@ namespace CheckLanguageFile;
 internal partial class LanguageStrings : ObservableObject
 {
     [ObservableProperty]
-    private string _stringKey;
+    public partial string? StringKey { get; set; }
 
     [ObservableProperty]
-    private string _stringValue;
-
+    public partial string? StringValue { get; set; }
     [ObservableProperty]
-    private string _compareValue;
+    public partial string? CompareValue { get; set; }
 }

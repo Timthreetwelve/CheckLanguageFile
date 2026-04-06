@@ -17,27 +17,27 @@ using System.Windows.Data;
 
 namespace CheckLanguageFile;
 
-public partial class MainWindow : Window
+internal partial class MainWindow : Window
 {
-    public List<string> MissingValues { get; set; } = new();
+    private List<string> MissingValues { get; set; } = [];
 
     public MainWindow()
     {
         InitializeComponent();
 
-        Title = $"Check Language File - {GitVersionInformation.SemVer}";
+        Title = $"Check Language File - {ThisAssembly.AssemblyVersion}";
     }
 
     #region Check the file
-    public void ReadFile(string fileToCheck)
+
+    private void ReadFile(string fileToCheck)
     {
-        ResourceDictionary dict1 = new();
+        ResourceDictionary dict1 = [];
         try
         {
             dataGrid.ItemsSource = null;
             dataGrid.Items.Clear();
 
-            string file = Path.GetFileName(fileToCheck);
             string fullPath = Path.GetFullPath(fileToCheck);
             messages.Text = $"Validating: {fullPath}\n";
 
@@ -45,7 +45,7 @@ public partial class MainWindow : Window
 
             messages.Text += $"There are a total of {dict1.Count} keys.\n";
 
-            List<LanguageStrings> lStrings = new();
+            List<LanguageStrings> lStrings = [];
             int problems = 0;
             foreach (DictionaryEntry item in dict1)
             {
@@ -95,7 +95,8 @@ public partial class MainWindow : Window
     #endregion Check the file
 
     #region Compare dictionaries
-    public void CompareLanguageDictionaries()
+
+    private void CompareLanguageDictionaries()
     {
         btnExport.IsEnabled = false;
 
@@ -117,8 +118,8 @@ public partial class MainWindow : Window
             return;
         }
 
-        ResourceDictionary dict1 = new();
-        ResourceDictionary dict2 = new();
+        ResourceDictionary dict1 = [];
+        ResourceDictionary dict2 = [];
 
         try
         {
@@ -129,14 +130,14 @@ public partial class MainWindow : Window
         {
             if (ex.InnerException != null)
             {
-                _ = MessageBox.Show("{ex.Message}\n{ex.InnerException.Message}",
+                _ = MessageBox.Show($"{ex.Message}\n{ex.InnerException.Message}",
                     "Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
             else
             {
-                _ = MessageBox.Show("{ex.Message}",
+                _ = MessageBox.Show($"{ex.Message}",
                     "Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
@@ -150,15 +151,15 @@ public partial class MainWindow : Window
         CompareGrid.Columns[1].Header = dict1FileName;
         CompareGrid.Columns[2].Header = dict2FileName;
 
-        List<LanguageStrings> l1Strings = new();
-        List<LanguageStrings> l2Strings = new();
+        List<LanguageStrings> l1Strings = [];
+        List<LanguageStrings> l2Strings = [];
 
         foreach (DictionaryEntry kvp in dict1)
         {
             LanguageStrings ls = new()
             {
                 StringKey = kvp.Key.ToString(),
-                StringValue = kvp.Value.ToString(),
+                StringValue = kvp.Value?.ToString(),
             };
             l1Strings.Add(ls);
         }
@@ -167,53 +168,53 @@ public partial class MainWindow : Window
             LanguageStrings ls = new()
             {
                 StringKey = kvp.Key.ToString(),
-                StringValue = kvp.Value.ToString(),
+                StringValue = kvp.Value?.ToString(),
             };
             l2Strings.Add(ls);
         }
 
-        l1Strings = l1Strings.OrderBy(l => l.StringKey).ToList();
-        l2Strings = l2Strings.OrderBy(l => l.StringKey).ToList();
-        List<LanguageStrings> combined = new();
+        l1Strings = [.. l1Strings.OrderBy(l => l.StringKey)];
+        l2Strings = [.. l2Strings.OrderBy(l => l.StringKey)];
+        List<LanguageStrings> combined = [];
 
         txtKeys1.Text = $"{l1Strings.Count} keys";
         txtKeys2.Text = $"{l2Strings.Count} keys";
 
         StringComparer comparer = StringComparer.Ordinal;
 
-        IEnumerable<string> result2 = l2Strings.Select(x => x.StringKey).Except(l1Strings.Select(x => x.StringKey), comparer);
+        IEnumerable<string?> result2 = l2Strings.Select(x => x.StringKey).Except(l1Strings.Select(x => x.StringKey), comparer);
         if (result2.Any())
         {
-            foreach (var item in result2)
+            foreach (string? item in result2)
             {
                 Debug.WriteLine($"{dict1FileName} does not have key {item}");
             }
         }
 
-        IEnumerable<string> result1 = l1Strings.Select(x => x.StringKey).Except(l2Strings.Select(x => x.StringKey), comparer);
+        IEnumerable<string?> result1 = l1Strings.Select(x => x.StringKey).Except(l2Strings.Select(x => x.StringKey), comparer);
         if (result1.Any())
         {
-            foreach (var item in result1)
+            foreach (string? item in result1)
             {
                 Debug.WriteLine($"{dict2FileName} does not have key {item}");
-                MissingValues.Add(item);
+                MissingValues.Add(item!);
             }
             btnExport.IsEnabled = true;
         }
 
-        IEnumerable<string> result3 = l2Strings.Select(x => x.StringKey).Intersect(l1Strings.Select(x => x.StringKey), comparer);
+        IEnumerable<string?> result3 = l2Strings.Select(x => x.StringKey).Intersect(l1Strings.Select(x => x.StringKey), comparer);
         if (result3.Any())
         {
             Debug.WriteLine($"{result3.Count()} keys are the same");
         }
 
-        foreach (var item in l1Strings)
+        foreach (LanguageStrings? item in l1Strings)
         {
             LanguageStrings ls = new()
             {
                 StringKey = item.StringKey,
                 StringValue = item.StringValue,
-                CompareValue = GetDictValue(l2Strings, item.StringKey)
+                CompareValue = GetDictValue(l2Strings, item.StringKey!)
             };
             combined.Add(ls);
         }
@@ -224,12 +225,8 @@ public partial class MainWindow : Window
     #region Get a value from a dictionary
     private static string GetDictValue(List<LanguageStrings> list, string key)
     {
-        string x = list.Find(x => x.StringKey == key)?.StringValue;
-        if (string.IsNullOrEmpty(x))
-        {
-            return string.Empty;
-        }
-        return list.Find(x => x.StringKey == key).StringValue;
+        string? x = list.Find(x => x.StringKey == key)?.StringValue;
+        return string.IsNullOrEmpty(x) ? string.Empty : list.Find(s => s.StringKey == key)?.StringValue!;
     }
     #endregion Get a value from a dictionary
 
@@ -304,7 +301,6 @@ public partial class MainWindow : Window
 
                 CompareLanguageDictionaries();
             }
-
         }
     }
 
@@ -341,7 +337,6 @@ public partial class MainWindow : Window
 
                 CompareLanguageDictionaries();
             }
-
         }
     }
 
@@ -393,10 +388,14 @@ public partial class MainWindow : Window
     {
         RemoveFilter();
     }
+    private void Radio_UnequalValue_Checked(object sender, RoutedEventArgs e)
+    {
+        FilterUnequalValue();
+    }
     #endregion Radio buttons
 
     #region Filter changed
-    private void TbxFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    private void TbxFilter_TextChanged(object sender, TextChangedEventArgs e)
     {
         FilterTheGrid();
     }
@@ -405,13 +404,11 @@ public partial class MainWindow : Window
     #region Drag and drop events
     private void TextBox_PreviewDrop(object sender, DragEventArgs e)
     {
-        if (e.Data?.GetDataPresent(DataFormats.FileDrop) == true)
+        if (e.Data?.GetDataPresent(DataFormats.FileDrop) != true) return;
+        textBox.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().FirstOrDefault();
+        if (textBox.Text is not null)
         {
-            textBox.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().ToList().FirstOrDefault();
-            if (textBox.Text is not null)
-            {
-                ReadFile(textBox.Text);
-            }
+            ReadFile(textBox.Text);
         }
     }
 
@@ -419,7 +416,7 @@ public partial class MainWindow : Window
     {
         if (e.Data?.GetDataPresent(DataFormats.FileDrop) == true)
         {
-            tbxFile1.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().ToList().FirstOrDefault();
+            tbxFile1.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().FirstOrDefault();
         }
     }
 
@@ -427,13 +424,13 @@ public partial class MainWindow : Window
     {
         if (e.Data?.GetDataPresent(DataFormats.FileDrop) == true)
         {
-            tbxFile2.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().ToList().FirstOrDefault();
+            tbxFile2.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().FirstOrDefault();
         }
     }
 
     private void TextBox_Drop(object sender, DragEventArgs e)
     {
-        TextBox box = sender as TextBox;
+        if (sender is not TextBox box) return;
         box.Focus();
         box.CaretIndex = box.Text.Length;
         box.ScrollToEnd();
@@ -443,10 +440,10 @@ public partial class MainWindow : Window
     {
         if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
-            FileInfo fileInfo = new(((DataObject)e.Data).GetFileDropList().Cast<string>().ToList().FirstOrDefault());
+            FileInfo fileInfo = new(((DataObject)e.Data).GetFileDropList().Cast<string>().FirstOrDefault()!);
             e.Effects = (((DataObject)e.Data).GetFileDropList()
                 .Cast<string>()
-                .ToList()?.
+                .ToList().
                 Count == 1 && fileInfo.Extension == ".xaml")
                 ? DragDropEffects.Copy
                 : DragDropEffects.None;
@@ -460,7 +457,8 @@ public partial class MainWindow : Window
     #endregion Drag and drop events
 
     #region Filter the datagrid
-    public void FilterTheGrid(bool exit = false)
+
+    private void FilterTheGrid()
     {
         string filter = tbxFilter.Text;
 
@@ -468,18 +466,14 @@ public partial class MainWindow : Window
         if (filter?.Length == 0)
         {
             cv.Filter = null;
-            if (exit)
-            {
-                return;
-            }
         }
         else
         {
             cv.Filter = o =>
             {
-                LanguageStrings ls = o as LanguageStrings;
-                return ls.StringKey.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
-                       ls.StringKey.Contains(filter, StringComparison.OrdinalIgnoreCase);
+                LanguageStrings? ls = o as LanguageStrings;
+                return ls!.StringKey!.Contains(filter!, StringComparison.OrdinalIgnoreCase) ||
+                       ls.CompareValue!.Contains(filter!, StringComparison.OrdinalIgnoreCase);
             };
         }
     }
@@ -493,8 +487,8 @@ public partial class MainWindow : Window
             ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
             cv.Filter = o =>
             {
-                LanguageStrings ls = o as LanguageStrings;
-                if (ls.StringValue?.Length == 0)
+                LanguageStrings? ls = o as LanguageStrings;
+                if (ls!.StringValue?.Length == 0)
                 {
                     return true;
                 }
@@ -507,16 +501,44 @@ public partial class MainWindow : Window
         }
     }
 
+    private void FilterUnequalValue()
+    {
+        if (CompareGrid.ItemsSource != null)
+        {
+            ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
+            cv.Filter = o =>
+            {
+                LanguageStrings? ls = o as LanguageStrings;
+                if (ls!.StringValue?.Length == 0)
+                {
+                    return false;
+                }
+                if (ls.CompareValue?.Length == 0)
+                {
+                    return false;
+                }
+                if (ls.StringValue != ls.CompareValue)
+                {
+                    return true;
+                }
+                else if (ls.CompareValue != ls.StringValue)
+                {
+                    return true;
+                }
+                return false;
+            };
+        }
+    }
+
     private void FilterSameValue()
     {
         if (CompareGrid.ItemsSource != null)
         {
-
             ICollectionView cv = CollectionViewSource.GetDefaultView(CompareGrid.ItemsSource);
             cv.Filter = o =>
             {
-                LanguageStrings ls = o as LanguageStrings;
-                return ls.CompareValue == ls.StringValue;
+                LanguageStrings? ls = o as LanguageStrings;
+                return ls!.CompareValue == ls.StringValue;
             };
         }
     }
@@ -533,7 +555,7 @@ public partial class MainWindow : Window
     #endregion Filter CompareGrid
 
     #region Swap compare files
-    public void SwapFiles()
+    private void SwapFiles()
     {
         (tbxFile2.Text, tbxFile1.Text) = (tbxFile1.Text, tbxFile2.Text);
         CompareLanguageDictionaries();
@@ -551,30 +573,28 @@ public partial class MainWindow : Window
     #endregion Escape Key
 
     #region Format and export keys with missing values
-    public void ExportMissing()
+    private void ExportMissing()
     {
-        if (MissingValues.Count > 0)
+        if (MissingValues.Count == 0)
+            return;
+        StringBuilder sb = new();
+        foreach (string item in MissingValues)
         {
-            StringBuilder sb = new();
-            foreach (var item in MissingValues)
-            {
-                _ = sb.Append("<sys:String x:Key=\"").Append(item).AppendLine("\"></sys:String>");
-            }
-            string missing = sb.ToString();
+            _ = sb.Append("<sys:String x:Key=\"").Append(item).AppendLine("\"></sys:String>");
+        }
+        string missing = sb.ToString();
 
-            SaveFileDialog save = new()
-            {
-                Title = "Save",
-                Filter = "Txt File|*.txt",
-                FileName = "ExportedStrings.txt",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-            };
-            bool? result = save.ShowDialog();
-            if (result == true)
-            {
-                File.WriteAllText(save.FileName, missing);
-            }
-
+        SaveFileDialog save = new()
+        {
+            Title = "Save",
+            Filter = "Txt File|*.txt",
+            FileName = "ExportedStrings.txt",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+        };
+        bool? result = save.ShowDialog();
+        if (result == true)
+        {
+            File.WriteAllText(save.FileName, missing);
         }
     }
     #endregion Format and export keys with missing values
