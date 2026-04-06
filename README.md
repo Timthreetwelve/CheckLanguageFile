@@ -37,7 +37,7 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 
 ❌ No logging.
 
-### Requires .NET 6
+### Requires .NET 10
 
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
