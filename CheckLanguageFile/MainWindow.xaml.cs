@@ -26,7 +26,31 @@ internal partial class MainWindow : Window
         InitializeComponent();
 
         Title = $"Check Language File - {ThisAssembly.AssemblyVersion}";
+
+        CommandLine();
     }
+
+    #region Process command line arguments
+    private void CommandLine()
+    {
+        if (App.Args.Length > 0)
+        {
+            string fileName = App.Args[0];
+            if (File.Exists(fileName))
+            {
+                textBox.Text = fileName;
+                ReadFile(fileName);
+            }
+            else
+            {
+                _ = MessageBox.Show("File not found",
+                                    "ERROR",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+            }
+        }
+    }
+    #endregion Process command line arguments
 
     #region Check the file
 
@@ -404,7 +428,8 @@ internal partial class MainWindow : Window
     #region Drag and drop events
     private void TextBox_PreviewDrop(object sender, DragEventArgs e)
     {
-        if (e.Data?.GetDataPresent(DataFormats.FileDrop) != true) return;
+        if (e.Data?.GetDataPresent(DataFormats.FileDrop) != true)
+            return;
         textBox.Text = ((DataObject)e.Data).GetFileDropList().Cast<string>().FirstOrDefault();
         if (textBox.Text is not null)
         {
@@ -430,7 +455,8 @@ internal partial class MainWindow : Window
 
     private void TextBox_Drop(object sender, DragEventArgs e)
     {
-        if (sender is not TextBox box) return;
+        if (sender is not TextBox box)
+            return;
         box.Focus();
         box.CaretIndex = box.Text.Length;
         box.ScrollToEnd();
