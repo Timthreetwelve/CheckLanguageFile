@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace CheckLanguageFile;
 
-class CellConverter : IMultiValueConverter
+internal class CellConverter : IMultiValueConverter
 {
     public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
     {
