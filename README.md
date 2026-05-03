@@ -50,6 +50,7 @@ Files to be checked can be selected:
    
      -  The error message will indicate the key name and line number.
      -  Open the .xaml file in your editor and remove or edit the duplicate key.
+     -  Save the file in your editor and then validate again.
      -  Repeat as needed to find all duplicate keys.
      </Details>
   
