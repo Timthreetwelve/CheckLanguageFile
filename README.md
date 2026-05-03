@@ -27,7 +27,6 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 - 🆕 Export the keys with missing values. Lines are formatted for the xaml file. Just add the translated strings between the `><` and paste into the appropriate place in the language file.
 
 ### Nothing fancy:
-❌ There's no installer, just a portable version in a zip file.
 
 ❌ No help or readme file.
 
