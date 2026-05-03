@@ -1,4 +1,23 @@
-## Check Language File
+<h1 align="center">
+ Check Language File
+</h1>
+
+<div align="center">
+  
+[![GitHub](https://img.shields.io/github/license/Timthreetwelve/CheckLanguageFile?style=plastic&color=seagreen)](https://github.com/Timthreetwelve/CheckLanguageFile/blob/main/LICENSE)
+[![NET6win](https://img.shields.io/badge/.NET-10.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest) 
+[![GitHub Release Date](https://img.shields.io/github/release-date/timthreetwelve/CheckLanguageFile?style=plastic&color=orange)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest) 
+[![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/timthreetwelve/CheckLanguageFile/latest?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
+[![GitHub last commit](https://img.shields.io/github/last-commit/timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
+[![GitHub commits](https://img.shields.io/github/commit-activity/m/timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
+[![GitHub Stars](https://img.shields.io/github/stars/timthreetwelve/CheckLanguageFile?style=plastic&color=goldenrod&logo=github)](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars)
+[![GitHub all releases](https://img.shields.io/github/downloads/Timthreetwelve/CheckLanguageFile/total?style=plastic&label=total%20downloads&color=teal)](https://github.com/Timthreetwelve/CheckLanguageFile/releases) 
+[![GitHub release (by tag)](https://img.shields.io/github/downloads/timthreetwelve/CheckLanguageFile/latest/total?style=plastic&color=2196F3&label=downloads%20latest%20version)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest)
+[![GitHub Issues](https://img.shields.io/github/issues/timthreetwelve/CheckLanguageFile?style=plastic&color=orangered)](https://github.com/Timthreetwelve/CheckLanguageFile/issues)
+[![GitHub Issues](https://img.shields.io/github/issues-closed/timthreetwelve/CheckLanguageFile?style=plastic&color=slateblue)](https://github.com/Timthreetwelve/CheckLanguageFile/issues)
+
+</div>
 
 This is a utility program intended to be used to validate the resource dictionary based language files used in the **Timthreetwelve** applications. The language files may also be compared to other language files to check for missing or deleted keys.
 
@@ -21,10 +40,10 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 - Two files are compared.
 - Total number of keys are listed for each file.
 - The grid at the bottom lists the values for each of the files. Missing values and values that are the same are color coded.
-- 🆕 The grid can be filtered to show only keys with no values or keys where the value is the same for both files.
-- 🆕 Both files can be added at the same time when using the file open dialog. Simply `Ctrl+Click` on two files.
-- 🆕 File names are displayed in the grid column headers.
-- 🆕 Export the keys with missing values. Lines are formatted for the xaml file. Just add the translated strings between the `><` and paste into the appropriate place in the language file.
+- The grid can be filtered to show only keys with no values or keys where the value is the same for both files.
+- Both files can be added at the same time when using the file open dialog. Simply `Ctrl+Click` on two files.
+- File names are displayed in the grid column headers.
+- Export the keys with missing values. Lines are formatted for the xaml file. Just add the translated strings between the `><` and paste into the appropriate place in the language file.
 
 ### Nothing fancy:
 
@@ -36,7 +55,7 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 
 ❌ No logging.
 
-### Requires .NET 10
+### ⚠️ Requires .NET 10 ⚠️
 
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
