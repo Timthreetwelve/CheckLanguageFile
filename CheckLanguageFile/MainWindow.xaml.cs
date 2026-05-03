@@ -624,4 +624,15 @@ internal partial class MainWindow : Window
         }
     }
     #endregion Format and export keys with missing values
+
+    #region Click on hyperlink
+    private void Hyperlink_Click(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("Hyperlink clicked");
+        Process p = new();
+        p.StartInfo.FileName = "https://github.com/Timthreetwelve/CheckLanguageFile#-check-language-file";
+        p.StartInfo.UseShellExecute = true;
+        p.Start();
+    }
+    #endregion Click on hyperlink
 }
