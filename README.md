@@ -27,12 +27,31 @@ Files to be checked can be selected:
 - By using the file open dialog (three dot button next to the boxes)
 - By drag & drop into the appropriate textbox
 - By copying and pasting
+- <Details> 
+  <Summary>By right-clicking file in File Explorer (open for details)</Summary>
+
+  - Select `Open with` from the right-click menu.
+  - Select `Choose another app`.
+  - Scroll down if needed and select `Choose an app on your PC`
+  - Navigate as needed then select `CheckLanguageFile.exe`.
+  - Click `Just once`.
+  - This should only be needed once. After that it should stay in the `Open with` menu.
+</Details>
+
 
 ### In the File Validation tab, files are checked for:
 - Syntax errors
-- Duplicate keys (technically only the first duplicate key, since a duplicate key will throw an exception)
 - Null or empty keys
 - Null or empty values
+- Duplicate keys 
+  -  Technically only the first duplicate key, since a duplicate key will throw an exception
+  -  <Details>
+     <Summary>Dealing with duplicate keys (open for details)</Summary>
+   
+     -  The error message will indicate the key name and line number.
+     -  Open the .xaml file in your editor and remove or edit the duplicate key.
+     -  Repeat as needed to find all duplicate keys.
+     </Details>
   
 Additionally, all keys and the associated string values are listed in a grid. The grid can be filtered by key or string.
 
@@ -55,7 +74,7 @@ Additionally, all keys and the associated string values are listed in a grid. Th
 
 ❌ No logging.
 
-### ⚠️ Requires .NET 10 ⚠️
+### ⚠️ Check Language File Requires .NET 10 ⚠️
 
 ### Screenshots
 ![CheckLanguageFile_2023-11-11_15-53-50](https://github.com/Timthreetwelve/CheckLanguageFile/assets/43152358/c4761e8a-2b70-46de-b1c6-d44a62e8537e)
