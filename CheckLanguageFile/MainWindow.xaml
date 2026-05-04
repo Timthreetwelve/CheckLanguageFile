@@ -94,10 +94,13 @@
                                       HorizontalScrollBarVisibility="Disabled"
                                       VerticalScrollBarVisibility="Auto">
 
-                            <TextBlock x:Name="messages"
-                                       Margin="20,10"
-                                       FontSize="14" FontWeight="Regular"
-                                       LineHeight="22" TextWrapping="Wrap" />
+                            <TextBox x:Name="messages"
+                                     MinHeight="40"
+                                     Padding="5"
+                                     BorderThickness="0"
+                                     Background="GhostWhite"
+                                     FontSize="14" FontWeight="Regular"
+                                     IsReadOnly="True" TextWrapping="Wrap" />
                         </ScrollViewer>
                     </Border>
 
