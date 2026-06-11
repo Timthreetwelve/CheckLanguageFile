@@ -635,4 +635,11 @@ internal partial class MainWindow : Window
         p.Start();
     }
     #endregion Click on hyperlink
+
+    #region Copy messages from textbox
+    private void CopyMessages_Click(object sender, RoutedEventArgs e)
+    {
+        Clipboard.SetText(messages.Text);
+    }
+    #endregion Copy messages from textbox
 }

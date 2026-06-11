@@ -85,25 +85,29 @@
                                 Click="Button_Clear_Click"
                                 Content="Clear" FontWeight="SemiBold" />
                     </StackPanel>
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="3"
+                                Orientation="Horizontal">
+                        <Border Margin="20,20,20,20"
+                                Background="GhostWhite"
+                                BorderBrush="Gray" BorderThickness="1">
+                            <ScrollViewer Grid.Row="2"
+                                          HorizontalScrollBarVisibility="Disabled"
+                                          VerticalScrollBarVisibility="Auto">
 
-                    <Border Grid.Row="2" Grid.ColumnSpan="3"
-                            Margin="20,20,20,20"
-                            Background="GhostWhite"
-                            BorderBrush="Gray" BorderThickness="1">
-                        <ScrollViewer Grid.Row="2"
-                                      HorizontalScrollBarVisibility="Disabled"
-                                      VerticalScrollBarVisibility="Auto">
-
-                            <TextBox x:Name="messages"
-                                     MinHeight="40"
-                                     Padding="5"
-                                     BorderThickness="0"
-                                     Background="GhostWhite"
-                                     FontSize="14" FontWeight="Regular"
-                                     IsReadOnly="True" TextWrapping="Wrap" />
-                        </ScrollViewer>
-                    </Border>
-
+                                <TextBox x:Name="messages"
+                                         MinWidth="800" MinHeight="40"
+                                         Padding="5"
+                                         Background="GhostWhite"
+                                         BorderThickness="0" FontSize="14"
+                                         FontWeight="Regular" IsReadOnly="True"
+                                         TextWrapping="Wrap" />
+                            </ScrollViewer>
+                        </Border>
+                        <Button Height="32"
+                                Margin="10" Padding="15,0"
+                                Content="Copy"
+                                Click="CopyMessages_Click"/>
+                    </StackPanel>
                     <DataGrid x:Name="dataGrid"
                               Grid.Row="3" Grid.ColumnSpan="3"
                               Margin="20,10,20,10"
