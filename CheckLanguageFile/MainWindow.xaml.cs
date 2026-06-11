@@ -25,7 +25,7 @@ internal partial class MainWindow : Window
     {
         InitializeComponent();
 
-        Title = $"Check Language File - {ThisAssembly.AssemblyVersion}";
+        Title = $"Check Language File - {VersionInfo.Version}";
 
         CommandLine();
     }
