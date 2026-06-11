@@ -4,13 +4,12 @@
 
 <div align="center">
   
-[![GitHub](https://img.shields.io/github/license/Timthreetwelve/CheckLanguageFile?style=plastic&color=seagreen)](https://github.com/Timthreetwelve/CheckLanguageFile/blob/main/LICENSE)
-[![NET6win](https://img.shields.io/badge/.NET-10.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
+[![License](https://img.shields.io/badge/license-MIT-seagreen?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/blob/main/LICENSE.txt)
+[![.NET](https://img.shields.io/badge/.NET-10.0--Windows-blueviolet?style=plastic)](https://dotnet.microsoft.com/en-us/download) 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest) 
 [![GitHub Release Date](https://img.shields.io/github/release-date/timthreetwelve/CheckLanguageFile?style=plastic&color=orange)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest) 
 [![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/timthreetwelve/CheckLanguageFile/latest?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
 [![GitHub last commit](https://img.shields.io/github/last-commit/timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
-[![GitHub commits](https://img.shields.io/github/commit-activity/m/timthreetwelve/CheckLanguageFile?style=plastic)](https://github.com/Timthreetwelve/CheckLanguageFile/commits/main)
 [![GitHub Stars](https://img.shields.io/github/stars/timthreetwelve/CheckLanguageFile?style=plastic&color=goldenrod&logo=github)](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars)
 [![GitHub all releases](https://img.shields.io/github/downloads/Timthreetwelve/CheckLanguageFile/total?style=plastic&label=total%20downloads&color=teal)](https://github.com/Timthreetwelve/CheckLanguageFile/releases) 
 [![GitHub release (by tag)](https://img.shields.io/github/downloads/timthreetwelve/CheckLanguageFile/latest/total?style=plastic&color=2196F3&label=downloads%20latest%20version)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest)
