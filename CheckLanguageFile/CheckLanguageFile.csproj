@@ -16,7 +16,7 @@
   <!-- Set version and prerelease string (if needed) -->
   <PropertyGroup>
     <VersionValidate>true</VersionValidate>
-    <Version>0.2.2</Version>
+    <Version>0.2.3</Version>
     <VersionPrerelease></VersionPrerelease>
   </PropertyGroup>
 
@@ -26,10 +26,14 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-    <PackageReference Include="VersionInfoGenerator" Version="3.2.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="VersionInfoGenerator" Version="3.2.1" PrivateAssets="all"/>
   </ItemGroup>
 
+  <Target Name="PrintInfo" AfterTargets="AfterBuild">
+    <Message Importance="high" Text="Assembly Version is $(AssemblyVersion)" />
+    <Message Importance="high" Text="Version is $(Version)" />
+    <Message Importance="high" Text="Commit is $(GitRevShort)" />
+    <Message Importance="high" Condition="'$(VersionPrerelease)' != ''" Text="Build is Prerelease" />
+  </Target>
+  
 </Project>
