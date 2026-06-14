@@ -15,6 +15,7 @@
 [![GitHub release (by tag)](https://img.shields.io/github/downloads/timthreetwelve/CheckLanguageFile/latest/total?style=plastic&color=2196F3&label=downloads%20latest%20version)](https://github.com/Timthreetwelve/CheckLanguageFile/releases/latest)
 [![GitHub Issues](https://img.shields.io/github/issues/timthreetwelve/CheckLanguageFile?style=plastic&color=orangered)](https://github.com/Timthreetwelve/CheckLanguageFile/issues)
 [![GitHub Issues](https://img.shields.io/github/issues-closed/timthreetwelve/CheckLanguageFile?style=plastic&color=slateblue)](https://github.com/Timthreetwelve/CheckLanguageFile/issues)
+[![Created](https://img.shields.io/badge/Created_By-Humans-blue?style=plastic)](https://github.com/Timthreetwelve)
 
 </div>
 
